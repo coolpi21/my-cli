@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const config = require("../../config/framework");
+const downloadRepo = require("../core/download-repo");
 
 async function executeCreateProjectCommand(projectName, argv) {
   // const projectName = projectName;
@@ -22,7 +23,9 @@ async function executeCreateProjectCommand(projectName, argv) {
   ];
 
   // 执行交互式命令
-  await inquirer.prompt(interactiveCommandQuestions);
+  const answer = await inquirer.prompt(interactiveCommandQuestions);
+  const { framework: userSelectedFramework } = answer;
+  downloadRepo(config.frameworkGroup[userSelectedFramework], projectName);
 }
 
 module.exports = executeCreateProjectCommand;
