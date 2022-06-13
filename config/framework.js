@@ -1,10 +1,11 @@
 const frameworkGroup = {
-  vue2: "vue2.0+ 版本",
-  vue3: "vue3.0+ 版本",
-  "vue3 + vite": "https://github.com/coolpi21/vite-vue-template.git#master",
-};
+  'vue3-custom': 'https://gitee.com/coolpi21/yl-vue3-base-template.git',
+  'vue3-basic': '',
+  'vue2-custom': '',
+  'vue2-basic': ''
+}
 
 module.exports = {
-  framework: Object.keys(frameworkGroup),
-  frameworkGroup,
-};
+  framework: ['vue2', 'vue3'],
+  frameworkGroup
+}

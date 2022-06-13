@@ -1,13 +1,10 @@
 {
   "name": "yl-cli",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "yl脚手架",
   "main": "index.js",
   "bin": {
     "yl-cli": "bin/cli.js"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",

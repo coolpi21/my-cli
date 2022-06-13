@@ -1,31 +1,23 @@
-const inquirer = require("inquirer");
-const config = require("../../config/framework");
-const downloadRepo = require("../core/download-repo");
+const inquirer = require('inquirer')
+const config = require('../../config/framework')
+const downloadRepo = require('../core/download-repo')
+const generateAnswerList = require('../../config/answerList')
 
 async function executeCreateProjectCommand(projectName, argv) {
-  // const projectName = projectName;
-  const commandOptions = argv;
-
-  // 交互式命令
-  const interactiveCommandQuestions = [
-    {
-      type: "list",
-      name: "framework",
-      message: "请选择需要使用的框架",
-      choices: config.framework,
-      validate(answer) {
-        if (!answer) {
-          return "必填项";
-        }
-        return true;
-      },
-    },
-  ];
-
+  // 自定义对话列表的type参数
+  const commandOptions = argv
+  const customAnswerType = projectName ? null : 'needProjectName'
+  const answersList = generateAnswerList(customAnswerType)
   // 执行交互式命令
-  const answer = await inquirer.prompt(interactiveCommandQuestions);
-  const { framework: userSelectedFramework } = answer;
-  downloadRepo(config.frameworkGroup[userSelectedFramework], projectName);
+  try {
+    const answer = await inquirer.prompt(answersList)
+    const { framework: userSelectedFramework, config: userSelectedConfig } =
+      answer
+    console.log(userSelectedFramework, userSelectedConfig)
+    downloadRepo(config.frameworkGroup[userSelectedFramework], projectName)
+  } catch (e) {
+    console.log(e)
+  }
 }
 
-module.exports = executeCreateProjectCommand;
+module.exports = executeCreateProjectCommand
