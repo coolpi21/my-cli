@@ -1,6 +1,8 @@
 #! /usr/bin/env node
 const program = require('commander')
+const pkg = require('../package.json')
 
+program.version(pkg.version)
 // help option
 const generateHelpCommandOption = require('../lib/core/help-option')
 generateHelpCommandOption(program)

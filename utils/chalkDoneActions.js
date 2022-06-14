@@ -2,14 +2,12 @@ const chalk = require('chalk')
 
 function handleDoneActionsHint(projectPath) {
   console.log(`
-  ==============================
-  ${chalk.green.bold('Done: ')}
+  ${chalk.green.bold('🎉 Done: 您已成功创建项目')}
 
-  - ${chalk.green('cd ' + projectPath)}
-  - ${chalk.green('git init --initial-branch=master')}
-  - ${chalk.green('npm install')}
-  - ${chalk.green('npm run dev')}
-  ==============================
+  $ ${chalk.blue('cd ' + projectPath)}
+  $ ${chalk.blue('git init --initial-branch=master')}
+  $ ${chalk.blue('npm install')}
+  $ ${chalk.blue('npm run dev')}
   `)
 }
 

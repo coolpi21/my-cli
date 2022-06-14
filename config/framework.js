@@ -1,7 +1,7 @@
 // 模板地址
 const frameworkGroup = {
   'vue3-custom': 'https://gitee.com/coolpi21/yl-vue3-base-template.git#master',
-  'vue3-basic': '',
+  'vue3-basic': 'https://gitee.com/coolpi21/vue3-base-template.git#master',
   'vue2-custom': '',
   'vue2-basic': ''
 }
