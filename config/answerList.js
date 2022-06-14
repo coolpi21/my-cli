@@ -1,17 +1,13 @@
 const config = require('./framework')
-const { checkRequiredFieldsAnswer } = require('../utils/checkAnswer')
+const {
+  checkRequiredFieldsAnswer,
+  checkRequiredAnswer,
+  checkProjectVersionIsValid,
+  checkProjectNameIsValid
+} = require('../utils/checkAnswer')
 
-// 配置框架对话列表
+// 配置对话列表
 const interactiveCommandQuestions = [
-  {
-    type: 'input',
-    name: 'projectname',
-    message: '请输入需要创建的项目名',
-    default: 'yl-project',
-    validate: function (answer) {
-      checkRequiredFieldsAnswer(this, answer)
-    }
-  },
   {
     type: 'list',
     name: 'framework',
@@ -24,21 +20,28 @@ const interactiveCommandQuestions = [
   {
     type: 'input',
     name: 'config',
-    message: '是否使用定制化配置（y/n)',
+    message: '是否使用定制化配置（y/n/yes/no)',
     validate: function (answer) {
-      const answersList = ['yes', 'y', 'no', 'n']
-      if (!answersList.includes(answer.toLowerCase())) {
-        return '请输入y/yes/no/n'
-      }
-      return true
+      checkRequiredAnswer(this, answer)
+    }
+  },
+  {
+    type: 'input',
+    name: 'projectname',
+    message: '请输入项目名称',
+    validate: function (answer) {
+      checkProjectNameIsValid(this, answer)
+    }
+  },
+  {
+    type: 'input',
+    name: 'projectversion',
+    message: '请输入项目版本号',
+    default: '1.0.0',
+    validate: function (answer) {
+      checkProjectVersionIsValid(this, answer)
     }
   }
 ]
 
-function generateAnswerList(type = null) {
-  return type === 'needProjectName'
-    ? interactiveCommandQuestions
-    : interactiveCommandQuestions.slice(1)
-}
-
-module.exports = generateAnswerList
+module.exports = interactiveCommandQuestions
