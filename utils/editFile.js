@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 function editFile({ version, projectName, projectPath }) {
-  console.log(version, projectName)
+  // console.log(version, projectName)
 
   return new Promise((resolve, reject) => {
     // 读取文件

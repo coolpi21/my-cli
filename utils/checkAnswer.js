@@ -1,10 +1,11 @@
 const semver = require('semver')
+const { ANSWERS_TIPS } = require('../config/tipsText')
 
 // 检查必选项命令
 function checkRequiredFieldsAnswer(context, answer) {
   handleAsyncDoneEvent(context, (done) => {
     if (!answer) {
-      done('请输入必选项')
+      done(ANSWERS_TIPS.required)
       return
     }
   })
@@ -15,7 +16,7 @@ function checkRequiredAnswer(context, answer) {
   handleAsyncDoneEvent(context, (done) => {
     const answersList = ['yes', 'y', 'no', 'n']
     if (!answersList.includes(answer.toLowerCase())) {
-      done('请输入y/yes/no/n')
+      done(ANSWERS_TIPS.confirmed)
       return
     }
   })
@@ -27,11 +28,7 @@ function checkProjectNameIsValid(context, answer) {
     const projectNameReg =
       /^[a-zA-Z]+([-][a-zA-Z][a-zA-Z0-9]*|[_][a-zA-Z][a-zA-Z0-9]*|[a-zA-Z0-9])*$/
     if (!projectNameReg.test(answer)) {
-      done(`请输入合法名称：
-          规则一：输入的首字符为英文字符
-          规则二：尾字符必须为英文或数字
-          规则三：字符仅允许-和_两种
-        `)
+      done(ANSWERS_TIPS.projectNameRules)
       return
     }
   })
@@ -41,7 +38,7 @@ function checkProjectNameIsValid(context, answer) {
 function checkProjectVersionIsValid(context, answer) {
   handleAsyncDoneEvent(context, (done) => {
     if (!semver.valid(answer)) {
-      done(`请输入合法版本号`)
+      done(ANSWERS_TIPS.versionNumberRules)
       return
     }
   })
